@@ -1,4 +1,5 @@
 from functools import wraps
+import colorama 
 
 
 def input_error(func):
@@ -7,10 +8,10 @@ def input_error(func):
         try:
             return func(*args, **kwargs)
         except ValueError:
-            return "Invalid command. Provide name and phone number."
+            return f"{colorama.Fore.RED}Invalid command. Provide name and phone number.{colorama.Style.RESET_ALL}"
         except KeyError as e:
-            return f"{e.args[0]}. Provide  name of an existing contact."
+            return f"{colorama.Fore.RED}{e.args[0]}. Provide  name of an existing contact.{colorama.Style.RESET_ALL}"
         except IndexError:
-            return "Invalid command. Provide a valid contact name."
+            return f"{colorama.Fore.RED}Invalid command. Provide a valid contact name.{colorama.Style.RESET_ALL}"
 
     return inner
